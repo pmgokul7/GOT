@@ -1,0 +1,33 @@
+.main_div{
+    text-align: center;
+}
+.back{
+    position: absolute;
+}
+.main{
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 20px;
+    width: 220px;
+    
+}
+.main img{
+    margin: auto;
+    border-radius: 10px;
+    transition: 1s ease-in-out;
+    z-index: 2;
+    
+}
+.main img:hover{
+ 
+    transform:rotateY(180deg);
+}
+.loading{
+    height: 100%;
+    width: 100%;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
