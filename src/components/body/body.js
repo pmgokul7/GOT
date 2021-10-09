@@ -1,7 +1,7 @@
 import axios from 'axios';
 import "./body.css"
 import React, { Component } from 'react';
-import Search from './search/search';
+import logo from "../../logo.png"
 class Body extends Component {
     state={
         isloading:true,
@@ -21,6 +21,7 @@ class Body extends Component {
          <input type="text" placeholder="search.." onChange={(e)=>{
            this.setState({input:e.target.value})
          }} value={this.state.input}/>
+         <img className="logo" src={logo} alt=""  height="100px" width="150px"/>
        </div>
       
       
