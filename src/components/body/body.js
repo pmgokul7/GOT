@@ -9,7 +9,7 @@ class Body extends Component {
     input: "",
   };
   componentDidMount() {
-    axios.get("https://thronesapi.com/api/v2/Characters").then(res => {
+    axios.get("https://thronesapi.com/api/v2/Characters").then((res) => {
       console.log(res.data);
       this.setState({ items: res.data, isloading: true });
     });
