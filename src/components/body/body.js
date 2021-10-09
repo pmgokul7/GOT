@@ -1,10 +1,12 @@
 import axios from 'axios';
 import "./body.css"
 import React, { Component } from 'react';
+import Search from './search/search';
 class Body extends Component {
     state={
-        isloading:false,
-        items:[]
+        isloading:true,
+        items:[],
+        input:""
     }
     componentDidMount(){
         axios.get("https://thronesapi.com/api/v2/Characters").then((res)=>{
@@ -12,25 +14,64 @@ class Body extends Component {
             this.setState({items:res.data,isloading:true})
         })
     }
-    render() { 
-        
-         return this.state.isloading===true ? <div className="main_div">
-            
-                 <div className="main">
-             {this.state.items.map((item)=>{
-                 return  <img src={item.imageUrl} alt="" height="250PX" width="250px"/>
-             })}
-            
-         </div>
-         
-            </div> :<div style={{boxSizing:'border-box',height:"100vh",display:'flex',justifyContent:"center",alignItems:'center'}} class="fa-3x">
- 
-  <i class="fas fa-spinner fa-pulse"></i>
- 
-</div>
-        
+  render(){
+      const {items,input}=this.state;
+      return <div className="container">
+       <div className="in">
+         <input type="text" placeholder="search.." onChange={(e)=>{
+           this.setState({input:e.target.value})
+         }} value={this.state.input}/>
+       </div>
+      
+      
+      <div className="main">
        
-    }
+       
+        
+      
+      {
+          items.filter(item=>{
+            if(input=="")
+            {
+              return item
+            }
+            else if(item.fullName.toLowerCase().includes(input.toLowerCase()))
+            {
+              return item
+            }
+          }).map((item)=>{
+            return <div className="inner">
+                <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src={item.imageUrl} alt="Avatar" style={{width:"300px",height:"300px"}}/>
+              </div>
+              <div class="flip-card-back">
+                <br/>
+                <h1>{item.fullName}</h1>
+                <hr/>  <br/>
+                <p>{`Family:${item.family}`}</p> <br/>
+                <p>{`Title:${item.title}`}</p>
+              </div>
+            </div>
+          </div>
+            </div>
+          
+        
+          })
+      }
+          </div>
+
+      
+      
+            
+          
+
+         
+      
+ 
+      </div>
+  }
 }
  
 export default Body;
